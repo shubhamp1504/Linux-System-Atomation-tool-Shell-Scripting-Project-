@@ -39,35 +39,52 @@ do
                 1)
 			system_info
 			echo
-			read -p "Press Enter To Continue..."
 			;;
 
 		2)
 			disk_usage
 			echo
-			read -p "Press Enter To Continue..."
 			;;
 
 		3)
 			memory_cpu_usage
 			echo
-			read -p "Press Enter To Continus..."
 			;;
 
 		4)
 			file_dir
 			echo
-			read -p "Press Enter To Continue..."
 			;;
 
 		5)
 			search
 			echo
-			read -p "Press Enter To Continue..."
 			;;
 
 		6)
+			backup
+			echo
+			;;
 
+		7)
+			logged_info
+			echo
+			;;
 
+		8)
+			compress_backup
+			echo
+			;;
+
+		9)
+			echo "program existing..."
+			exit
+			;;
+
+		*)
+			echo "Invalid Option..."
+			;;
+	
 	esac
+	read -p "Press Enter To Continue..."
 done
