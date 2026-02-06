@@ -1,6 +1,13 @@
 #!/bin/bash
 
-import system_info
+source ./system_info.sh
+source ./disk_usage.sh
+source ./memory_cpu_usage.sh
+source ./file_dir.sh
+source ./search.sh
+source ./backup.sh 
+source ./logged_info.sh
+source ./compress_backup.sh
 
 
 while true
@@ -30,4 +37,37 @@ do
 
         case $choice in
                 1)
-                        
+			system_info
+			echo
+			read -p "Press Enter To Continue..."
+			;;
+
+		2)
+			disk_usage
+			echo
+			read -p "Press Enter To Continue..."
+			;;
+
+		3)
+			memory_cpu_usage
+			echo
+			read -p "Press Enter To Continus..."
+			;;
+
+		4)
+			file_dir
+			echo
+			read -p "Press Enter To Continue..."
+			;;
+
+		5)
+			search
+			echo
+			read -p "Press Enter To Continue..."
+			;;
+
+		6)
+
+
+	esac
+done
