@@ -22,17 +22,17 @@ This project helps users perform common **system administration, monitoring, fil
 ## 📂 Project Structure
 
 linux-system-automation-tool/
-│
-├── atomation_tool.sh
-├── system_info.sh
-├── disk_usage.sh
-├── memory_cpu_usage.sh
-├── file_dir.sh
-├── search.sh
-├── backup.sh
-├── logged_info.sh
-├── compress_backup.sh
-└── README.md
+|
+|-- atomation_tool.sh
+|__ system_info.sh
+|__ disk_usage.sh
+|__ memory_cpu_usage.sh
+|__ file_dir.sh
+|__ search.sh
+|__ backup.sh
+|__ logged_info.sh
+|__ compress_backup.sh
+|-- README.md
 
 
 ##  Menu Options
