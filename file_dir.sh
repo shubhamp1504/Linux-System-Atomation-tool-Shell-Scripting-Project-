@@ -3,6 +3,11 @@
 file_dir() {
 	while true
 	do
+		echo
+		echo "========================= File and Directory Opretions Tool ========================"
+		echo
+
+		echo "Selected menu -"
 		echo "1. Create File"
 		echo "2. Create Directory"
 		echo "3. Delete File"
@@ -48,7 +53,7 @@ file_dir() {
 	
 			5)
 				echo "exited..."
-				exit 1
+				return
 				;;
 			
 			*)
@@ -56,6 +61,7 @@ file_dir() {
 				;;
 	
 		esac
-		read -p "Invalid Option..."
+		read -p "Press Enter to continue..."
+		clear
 	done
 }

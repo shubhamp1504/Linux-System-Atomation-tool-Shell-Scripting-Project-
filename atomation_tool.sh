@@ -26,9 +26,9 @@ do
         echo "3. Memory & CPU Usage"
         echo "4. File & Directory Operations"
         echo "5. search File"
-        echo "6. Backup File or Directory Operations (manual)"
+        echo "6. Backup File/Directory Operations (manual)"
         echo "7. Logged-in User Information"
-        echo "8. Compress File/Directory & Auto Backup"
+        echo "8. Compress/Uncompress File/Directory & Auto Backup"
         echo "9. Exit"
         echo "----------------------------------------------------------------------------------------------------------------------"
 
@@ -78,7 +78,7 @@ do
 
 		9)
 			echo "program existing..."
-			exit
+			exit 
 			;;
 
 		*)
