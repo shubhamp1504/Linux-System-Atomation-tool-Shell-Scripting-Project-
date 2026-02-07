@@ -1,14 +1,41 @@
 #!/bin/bash
 
 backup() {
-	read -p "Enter Directory To Backup :" src
-	read -p "Enter Destination Path :" dest
-	if [[ -d "$src" ]];
+
+	read -p "Enter File or Directory name To Backup :" src
+	
+	read -p "Enter Destination Path (Press Enter for current directory) :" dest
+
+	if [[ -z "$dest" ]];
 	then
-		tar -czf "$dest/backup_$(date +%F).tar.gz" "$src"
-		echo "Backup Completed Successfully..........."
+		dest="."
+	fi
+
+	backup_dir="$dest/backup"
+	mkdir -p "$backup_dir"
+
+
+	if [[ -f "$src" ]];
+	then
+		cp "$src" "$backup_dir/"
+		echo
+		echo "Backup Completed..."
+		echo "type : file"
+		echo "file name : $src"
+		echo "Backup Path : $(realpath "$backup_dir")"
+
+	elif [[ -d "$src" ]];
+	then
+		cp -r "$src" "$backup_dir/"
+		echo
+		echo "Backup Completed..."
+		echo "type : Directory"
+		echo "Directory name : $src"
+		echo "Backup Path : $(realpath "$backup_dir")"
+
 	else
-		echo "Directory Not Found"
+		echo
+		echo "File or Directory not found!..."
 	fi
 }
 
