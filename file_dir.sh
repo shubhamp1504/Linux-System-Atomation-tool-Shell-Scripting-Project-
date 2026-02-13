@@ -1,67 +1,93 @@
 #!/bin/bash
+                                                                                                                                    
+green_a="\e[32m"                                                                                    
+green_b="\e[2;32m" 
+green_c="\e[5;32m"
+red="\e[31m"
+red_a="\e[1;31m" 
+blue_a="\e[34m"
+blue_b="\e[1;34m"                          
+end="\e[0m"
+
 
 file_dir() {
 	while true
 	do
 		echo
-		echo "========================= File and Directory Opretions Tool ========================"
+		echo -e "${green_b}=========================${end} ${green_c}File and Directory Opretions Tool${end} ${green_b}========================${end}"
 		echo
 
-		echo "Selected menu -"
-		echo "1. Create File"
+		echo -e "${blue_a}Selected menu -${end}"
+		echo -e "${green_b}1. Create File"
 		echo "2. Create Directory"
 		echo "3. Delete File"
 		echo "4. Delete Directory"
-		echo "5. exit"
-	
+		echo -e "5. exit${end}"
+		echo
+		echo -e "$blue_b"
 		read -p "Choose Option:" achoice
+		echo -e "$end"
 	
 		case $achoice in
 			1)
+				echo -e "$green_b"
 				read -p "Entar File Name : " fname
+				echo -e "$end"
 				touch "$fname"
-				echo "File Created Successfully..........."
+				echo -e "${green_a}File Created Successfully...........${end}"
 				;;
 	
 			2)
+				echo -e "$green_b"
 				read -p "Enter Directory Name : " dname
+				echo -e "$end"
 				mkdir "$dname"
-				echo "Directory created Successfully............."
+				echo -e "${green_a}Directory created Successfully.............${end}"
 				;;
 	
 			3)
-				read -p "Entar File Name To Delate : " fdelate
+				echo -e "$green_b"
+				read -p "Entar File Name To Delate :" fdelate
+				echo -e "$end"
 				if [[ -f $fdelate ]];
 				then
+					echo -e "$red"
 					rm -i "$fdelate"
-					echo "Delated $fdelate File Successfully........................."
+					echo -e "$end"
+					echo -e "${green_a}Delated $fdelate File Successfully.........................${end}"
 				else
-					echo "Can not Found $fdelate File"
+					echo -e "${red}Can not Found $fdelate File${end}"
 				fi
 				;;
 	
 			4)
+				echo -e "$green_b"
 				read -p "Enter Directory Name To Delate :" ddelate
+				echo -e "$end"
 				if [[ -d $ddelate ]];
 				then
+					echo -e "$red"
 					rm -ri "$ddelate"
-					echo "Delated $ddelate Directory Successfully....................."
+					echo -e "$end"
+					echo -e "${green_a}Delated $ddelate Directory Successfully.....................${end}"
 				else
-					echo "Can not Found $ddelate directory"
+					echo -e "${red}Can not Found $ddelate directory${end}"
 				fi
 				;;
 	
 			5)
-				echo "exited..."
+				echo -e "${green_b}exited...${end}"
 				return
 				;;
 			
 			*)
-				echo "Invalid Option..............."
+				echo -e "${red_a}Invalid Option...............${end}"
 				;;
 	
 		esac
+		echo -e "$green_b"
 		read -p "Press Enter to continue..."
+		echo -e "$end"
 		clear
 	done
 }

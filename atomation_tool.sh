@@ -1,10 +1,12 @@
 #!/bin/bash
 
 
-green_a="\e[1;32m"
+green_a="\e[32m"
 green_b="\e[2;32m"
 green_c="\e[5;32m"
-red_a="\e[31m"
+red_a="\e[5;31m"
+blue_a="\e[34m"
+blue_b="\e[1;34m"
 end="\e[0m"
 
 source ./system_info.sh
@@ -20,16 +22,13 @@ source ./compress_backup.sh
 while true
 do
         clear
-        echo -e "${green_b}======================================================================================================================${end}"
         echo
-	echo -e "${green_b}.................................${end} ${green_c} Linux System Atomation Tool ${end} ${green_b}......................................................${end}"
+	echo -e "${green_b}**********************************${end} ${green_c} Linux System Atomation Tool ${end} ${green_b} *************************************${end}"
         echo
-        echo -e "${green_b}**********************************************************************************************************************${end}"
-	echo
 
-        echo "Select Menu:-"
+        echo -e "${blue_a}Select Menu:-${end}"
         echo
-        echo "1. Show System Imformation"
+        echo -e "${green_a}1. Show System Imformation"
         echo "2. Disk Usage"
         echo "3. Memory & CPU Usage"
         echo "4. File & Directory Operations"
@@ -38,11 +37,12 @@ do
         echo "7. Logged-in User Information"
         echo "8. Compress/Uncompress File/Directory & Auto Backup"
         echo "9. Exit"
-        echo "----------------------------------------------------------------------------------------------------------------------"
+        echo -e "----------------------------------------------------------------------------------------------------------------------${end}"
 
 
+	echo -e "${blue_b}"
         read -p "Enter Your Choice : " choice
-
+	echo -e "${end}"
         case $choice in
                 1)
 			system_info
@@ -85,14 +85,18 @@ do
 			;;
 
 		9)
-			echo "program existing..."
+			sleep 2s
+			echo -e "${green_a} program existing... ${end}"
+			echo
 			exit 
 			;;
 
 		*)
-			echo "Invalid Option..."
+			echo -e "${red_a} Invalid Option... ${end}"
 			;;
 	
 	esac
+	echo -e "${green_a}"
 	read -p "Press Enter To Continue..."
+	echo -e "${end}"
 done

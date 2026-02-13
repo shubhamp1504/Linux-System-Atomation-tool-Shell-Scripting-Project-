@@ -1,8 +1,19 @@
 #!/bin/bash
 
+green="\e[32m"
+blue="\e[34m"
+end="\e[0m"
+
 logged_info() {
-	echo "Logged-in-user :"
+	
+	echo
+	echo -e "${blue}Logged-in-user :${end}"
+	echo -e "${green}"
 	whoami
-	echo "User Details :"
+	echo -e "${end}"
+	echo
+	echo -e "${blue}User Details :${end}"
+	echo -e "$green"
 	id
+	echo -e "$end"
 }
