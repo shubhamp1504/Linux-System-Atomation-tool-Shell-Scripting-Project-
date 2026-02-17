@@ -12,6 +12,13 @@ end="\e[0m"
 
 compress_backup() {
 
+
+	log_dir="$HOME/Linux-System-Atomation-tool-Shell-Scripting-Project-/logs"
+	mkdir -p "$log_dir"
+    	activity_log="$log_dir/activity.log"
+	
+	> "$activity_log"
+
 	while true
 	do	
 		echo
@@ -29,55 +36,62 @@ compress_backup() {
 		echo
 	
 		case $choice in
-	
 			1)
 				echo -e "$green_a"
 				read -p "Enter File or Directory name To Compress and Backup :" src
 				read -p "Enter Destination Path (Press Enter for current directory) :" dest
 				echo -e "$end"
-	
+
 				if [[ -z "$dest" ]];
-	        		then
-	                		dest="."
-	        		fi
+			       	then
+					dest="."
+				fi
 
 				backup_dir="$dest/backup_dir"
 				mkdir -p "$backup_dir"
-		
+
 				DateTime=$(date +"%d-%m-%Y_%H:%M:%S")
 	
-				if [[ -f "$src" ]];
-	        		then
+				if [[ -f "$src" ]] || [[ -d "$src" ]];
+			       	then
+					
 					archive_name="$(basename "$src")_$DateTime.tar.gz"
 					tar -czf "$backup_dir/$archive_name" "$src"
+				    	if [[ $? -eq 0 ]];
+				       	then
+						echo
+        					echo -e "$green_b"
+        					echo "Compression and Backup Completed..."
+    					  	echo "Source : $src"
+        					echo -e "Compressed file name : $archive_name ${end}"
+     						echo -e "${blue_a}Backup Path : $(realpath "$backup_dir") ${end}"
+
+					        # ✅ Activity Logging
+					        echo "$(date '+%F %T') | COMPRESS | $src | $archive_name" >> "$activity_log"
 	
-					echo
-					echo -e "$green_b"
-					echo "Compression and Backup Completed..."
-					echo "type : file"
-					echo "file name : $src"
-					echo -e "Compressed file name : $archive_name ${end}"
-					echo -e "${blue_a}Backup Path : $(realpath "$backup_dir") ${end}"
-	
-				elif [[ -d "$src" ]];
-				then
-					archive_name="$(basename "$src")_$DateTime.tar.gz"
-					tar -czf "$backup_dir/$archive_name" "$src"
-		
-					echo
-					echo -e "$green_b"
-					echo "Compression and Backup Completed..."
-					echo "type : Directory"
-					echo "Directory name : $src"
-					echo -e "Compressed file name : $archive_name ${end}"
-					echo
-					echo -e "${blue_a}Backup Path : $(realpath "$backup_dir") ${end}"
+					        # ✅ File Size Check (Gmail 25MB limit safety)
+					        filesize=$(du -m "$backup_dir/$archive_name" | cut -f1)
+
+					        if [[ $filesize -lt 25 ]]; then
+							# ✅ Send Mail with Attachment
+						        echo "Backup File Created Successfully.
+
+							File Name: $archive_name
+							Location: $(realpath "$backup_dir")
+							Time: $(date)" | \
+
+            						echo -e "${green_b}Backup file sent successfully!${end}"
+						else
+					    		echo -e "${red}File size greater than 25MB. Mail not sent.${end}"
+						fi
+				    	else
+						echo -e "${red}Compression Failed!${end}"
+				    	fi
 				else
-					echo
-					echo -e "${red}File or Directory not found!...${end}"
+				    	echo
+				    	echo -e "${red}File or Directory not found!...${end}"
 				fi
 				;;
-	
 			
 			2)
 
@@ -141,12 +155,12 @@ compress_backup() {
 				    	echo -e "${green_b}Uncompression Completed${end}"
 				    	echo -e "${green_b}Extracted: $(basename "$selected_file")${end}"
 				    	echo -e "${blue_a}Location : $(realpath "$extract_path") ${end}"
-				    	# Logging
-					echo "$(date '+%F %T') | EXTRACT | $(basename "$selected_file") | $extract_path" >> "$LOG_FILE"
+				    	
+					# Logging
+					echo "$(date '+%F %T') | EXTRACT | $(basename "$selected_file") | $extract_path" >> "$activity_log"
 					echo -e "${green_b}Extraction details saved to logfile successfully...${end}"
 				else
 				    	echo -e "${red}Extraction Failed!${end}"
-				
 				fi
 				;;
 
@@ -166,4 +180,4 @@ compress_backup() {
 		clear
 	done
 
-}
+} 

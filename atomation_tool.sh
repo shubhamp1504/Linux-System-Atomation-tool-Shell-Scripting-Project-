@@ -85,7 +85,25 @@ do
 			;;
 
 		9)
-			sleep 2s
+
+		    
+			exit_time=$(date "+%Y-%m-%d %H:%M:%S")
+			
+			{
+				
+    				echo "Linux Automation Tool Exit Report " 
+    				echo "-------------------------------------------"
+    				echo "User: $USER "
+    				echo "Hostname: $(hostname) "
+    				echo "Exit Time: $exit_time "
+    				echo 
+				cat "$activity_log"
+			} > "$log_dir/report.txt"
+
+   			mail -s "Project Exit Update - Linux Automation Tool" shubhamvpatil01@gmail.com < "$log_dir/report.txt"
+
+    			echo -e "${green_a}Report sent to email successfully... ${end}"
+			sleep 1s
 			echo -e "${green_a} program existing... ${end}"
 			echo
 			exit 
