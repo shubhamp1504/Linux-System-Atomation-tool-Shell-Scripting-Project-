@@ -5,17 +5,45 @@ This project helps users perform common **system administration, monitoring, fil
 
 ---
 
-##  Features
+## 📌 Features
 
-✔ Interactive terminal-based menu  
-✔ User input at runtime  
-✔ Modular shell scripting using `source`  
-✔ System monitoring utilities  
-✔ File & directory operations  
-✔ File & directory search with full path  
-✔ Manual directory backup  
-✔ Automatic compression & backup  
-✔ Logged-in user information  
+### 🔹 System Information
+- Display hostname
+- Kernel version
+- System uptime
+- OS details
+
+### 🔹 Disk Usage
+- Show disk usage using `df -h`
+
+### 🔹 Memory & CPU Usage
+- Display RAM usage
+- CPU load information
+
+### 🔹 File & Directory Operations
+- Create file
+- Delete file
+- Create directory
+- Remove directory
+
+### 🔹 Search File
+- Search for a file by name
+
+### 🔹 Backup (Manual)
+- Create backup of file or directory
+
+### 🔹 Logged-in User Information
+- Display current logged-in users
+
+### 🔹 Compress / Uncompress & Auto Backup
+- Compress file/directory (.tar.gz)
+- Automatic backup folder creation
+- Email notification with attachment (if configured)
+- Activity logging
+
+### 🔹 Exit
+- Generate session report
+- Send summary report via email
 
 ---
 
@@ -37,21 +65,45 @@ linux-system-automation-tool/
 ```
 
 
-##  Menu Options
+## 📋 Menu Structure
 
-1. Show System Information  
-2. Disk Usage  
-3. Memory & CPU Usage  
-4. File & Directory Operations  
-5. Search File / Directory  
-6. Backup Directory (Manual)  
-7. Logged-in User Information  
-8. Compress File/Directory & Auto Backup  
-9. Exit  
+Select Menu:-
+
+1) Show System Information
+
+2) Disk Usage
+
+3) Memory & CPU Usage
+
+4) File & Directory Operations
+
+5) Search File
+
+6) Backup File/Directory Operations (Manual)
+
+7) Logged-in User Information
+
+8) Compress/Uncompress File/Directory & Auto Backup
+
+9) Exit
+
+
 
 ## How to Run the Project
 - git clone
 - cd Linux-System-Atomation-tool-Shell-Scripting-Project-
 - chmod +x *.sh
 - ./atomation.sh
+
+
+
+## 📧 Email Feature
+
+This tool can send:
+
+- Backup file attachments
+- Exit summary report
+- Activity log updates
+
+(Requires mail configuration)
 
