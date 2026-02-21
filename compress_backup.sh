@@ -66,14 +66,14 @@ compress_backup() {
         					echo -e "Compressed file name : $archive_name ${end}"
      						echo -e "${blue_a}Backup Path : $(realpath "$backup_dir") ${end}"
 
-					        # ✅ Activity Logging
+					        #  Activity Logging
 					        echo "$(date '+%F %T') | COMPRESS | $src | $archive_name" >> "$activity_log"
 	
-					        # ✅ File Size Check (Gmail 25MB limit safety)
+					        #  File Size Check (Gmail 25MB limit safety)
 					        filesize=$(du -m "$backup_dir/$archive_name" | cut -f1)
 
 					        if [[ $filesize -lt 25 ]]; then
-							# ✅ Send Mail with Attachment
+							#  Send Mail with Attachment
 						        echo "Backup File Created Successfully.
 
 							File Name: $archive_name
