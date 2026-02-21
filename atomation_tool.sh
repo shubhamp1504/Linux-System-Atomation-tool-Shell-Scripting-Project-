@@ -85,28 +85,42 @@ do
 			;;
 
 		9)
-
-		    
 			exit_time=$(date "+%Y-%m-%d %H:%M:%S")
-			
+			log_dir="$HOME/Linux-System-Atomation-tool-Shell-Scripting-Project-/logs"
+			mkdir -p "$log_dir"
+			report_file="$log_dir/report.txt"
+
 			{
+				echo "Linux Automation Tool Exit Report"
+			        echo "-------------------------------------------"
+			        echo "User: $USER"
+			    	echo "Hostname: $(hostname)"
+			    	echo "Exit Time: $exit_time"
+			    	echo
 				
-    				echo "Linux Automation Tool Exit Report " 
-    				echo "-------------------------------------------"
-    				echo "User: $USER "
-    				echo "Hostname: $(hostname) "
-    				echo "Exit Time: $exit_time "
-    				echo 
-				cat "$activity_log"
-			} > "$log_dir/report.txt"
-
-   			mail -s "Project Exit Update - Linux Automation Tool" shubhamvpatil01@gmail.com < "$log_dir/report.txt"
-
-    			echo -e "${green_a}Report sent to email successfully... ${end}"
+				if [[ -f "$activity_log" ]]; then
+					echo "Activity Summary:"
+					echo "-------------------------------------------"
+					cat "$activity_log"
+			    	else
+					echo "No activity log found for this session."
+			    	fi
+			} > "$report_file"
+			
+			# Send Mail only if report file created
+			if [[ -f "$report_file" ]]; then
+			    
+				mail -s "Project Exit Update - Linux Automation Tool" \ shubhamvpatil01@gmail.com < "$report_file"
+				echo -e "${green_a}Report sent to email successfully... ${end}"
+			else
+				echo -e "${red}Report file not created. Mail not sent.${end}"
+			
+			fi
+			
 			sleep 1s
-			echo -e "${green_a} program existing... ${end}"
+			echo -e "${green_a}Program exiting... ${end}"
 			echo
-			exit 
+			exit
 			;;
 
 		*)

@@ -11,11 +11,11 @@ end="\e[0m"
 
 
 compress_backup() {
-
-
 	log_dir="$HOME/Linux-System-Atomation-tool-Shell-Scripting-Project-/logs"
 	mkdir -p "$log_dir"
-    	activity_log="$log_dir/activity.log"
+	activity_log="$log_dir/activity.log"
+
+
 	
 	> "$activity_log"
 
