@@ -47,6 +47,17 @@ This project helps users perform common **system administration, monitoring, fil
 
 ---
 
+## 🛠️ Technologies Used
+
+- Linux (Ubuntu)
+- Bash Scripting
+- Cron Jobs
+- Mail Utility
+- Tar & Gzip
+- System Monitoring Commands (top, df, free, uptime, etc.)
+
+---
+
 ## 📂 Project Structure
 
 ```
@@ -88,16 +99,11 @@ Select Menu:-
 9) Exit
 
 
+---
 
-## How to Run the Project
-- git clone
-- cd Linux-System-Atomation-tool-Shell-Scripting-Project-
-- chmod +x *.sh
-- ./atomation.sh
+## 📧 Email Notification Feature
 
-
-
-## 📧 Email Feature
+After task completion, the tool automatically sends a system report to the configured email address.
 
 This tool can send:
 
@@ -107,3 +113,20 @@ This tool can send:
 
 (Requires mail configuration)
 
+---
+
+
+## How to Run the Project
+- git clone
+- cd Linux-System-Atomation-tool-Shell-Scripting-Project-
+- chmod +x *.sh
+- ./atomation.sh
+
+
+## 💻 Author
+
+Shubham Patil
+  
+DevOps Enthusiast | Linux | Automation | CI/CD
+
+---
