@@ -108,15 +108,21 @@ do
 			} > "$report_file"
 			
 			# Send Mail only if report file created
-			if [[ -f "$report_file" ]]; then
-			    
-				mail -s "Project Exit Update - Linux Automation Tool" \ shubhamvpatil01@gmail.com < "$report_file"
-				echo -e "${green_a}Report sent to email successfully... ${end}"
+
+			backup_dir="$HOME/Linux-System-Atomation-tool-Shell-Scripting-Project-/backup_dir"
+			backup_file=$(ls -t "$backup_dir"/*.tar.gz 2>/dev/null | head -1)
+
+			
+			if [[ -f "$report_file" && -n "$backup_file" ]]; then
+				mail -s "Project Exit Update - Linux Automation Tool" \
+					-A "$backup_file" \
+					shubhamvpatil01@gmail.com < "$report_file"
+									
+				echo -e "${green_a}Report & Attachment sent successfully...${end}"
 			else
-				echo -e "${red}Report file not created. Mail not sent.${end}"
-			
+				echo -e "${red}Report or attachment file missing!${end}"
 			fi
-			
+
 			sleep 1s
 			echo -e "${green_a}Program exiting... ${end}"
 			echo

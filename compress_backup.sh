@@ -5,6 +5,7 @@ green_b="\e[2;32m"
 green_c="\e[5;32m"
 red="\e[31m"
 red_a="\e[5;31m"
+red_c="\e[2;31m"
 blue_a="\e[34m"
 blue_b="\e[1;34m"
 end="\e[0m"
@@ -21,6 +22,8 @@ compress_backup() {
 
 	while true
 	do	
+		echo
+		clear
 		echo
 		echo -e "${green_b}==================${end} ${green_c}Compress / Uncompress and Auto Backup Tool ${end} ${green_b}==============${end}"
 		echo
@@ -103,7 +106,8 @@ compress_backup() {
 				
 				if [[ ! -d "$backup_dir" ]]; then
 				    	echo -e "${red}backup_dir not found in current location!${end}"
-					break
+					sleep 2
+					continue
 				    	
 				fi
 				
@@ -112,7 +116,8 @@ compress_backup() {
 				
 				if [[ ${#backups[@]} -eq 0 ]]; then    
 					echo -e "${red}No backup files found in backup_dir!${end}"
-					break
+					sleep 2
+					continue
 					
 				fi
 				
@@ -127,10 +132,30 @@ compress_backup() {
 				echo
 				echo -e "$green_b"
 				read -p "Enter file number to extract: " choice
+
+				if [[ -z "$choice" ]]; then
+				    	echo -e "${red_c} No file selected!${end}"
+					sleep 2
+				    	continue
+				fi
+				
+				if ! [[ "$choice" =~ ^[0-9]+$ ]]; then
+				    	echo -e "${red_c} Invalid input!${end}"
+				    	sleep 2
+					continue
+				fi
+				
+				if (( choice < 1 || choice > ${#backups[@]} )); then
+				    	echo -e "${red_c} Invalid selection!${end}"
+				    	sleep 2
+					continue
+				fi
+				
 				echo -e "$end"
+
 				selected_file="${backups[$((choice-1))]}"
 	
-				if [[ -z "$selected_file" ]]; then
+				if [[ ! -f "$selected_file" ]]; then
 					echo -e "${red_c}Invalid selection!${end}"
 					break
 					
@@ -144,7 +169,7 @@ compress_backup() {
 
 				if [[ ! -d "$extract_path" ]]; then
 				    	echo -e "${red}Extract directory does not exist!${end}"
-					break    	
+					    	
 				fi
 				
 				tar -xzf "$selected_file" -C "$extract_path"
@@ -163,6 +188,7 @@ compress_backup() {
 				    	echo -e "${red}Extraction Failed!${end}"
 				fi
 				;;
+
 
 			3)
 				echo -e "${green_a}exited...${end}"

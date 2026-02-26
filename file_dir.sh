@@ -33,28 +33,50 @@ file_dir() {
 				echo -e "$green_b"
 				read -p "Entar File Name : " fname
 				echo -e "$end"
-				touch "$fname"
-				echo -e "${green_a}File Created Successfully...........${end}"
+				if [[ -z $fname ]];
+				then
+					echo -e "${red} file name cannot be empty...${end}"
+				else
+					touch "$fname"
+					echo -e "${green_a}File Created Successfully...........${end}"
+				fi
 				;;
 	
 			2)
 				echo -e "$green_b"
 				read -p "Enter Directory Name : " dname
 				echo -e "$end"
-				mkdir "$dname"
-				echo -e "${green_a}Directory created Successfully.............${end}"
+				if [[ -z $dname ]];
+                                then
+                                        echo -e "${red} Directory name cannot be empty...${end}"
+                                else
+					mkdir "$dname"
+					echo -e "${green_a}Directory created Successfully.............${end}"
+				fi				
 				;;
 	
 			3)
 				echo -e "$green_b"
 				read -p "Entar File Name To Delate :" fdelate
 				echo -e "$end"
-				if [[ -f $fdelate ]];
+				if [[ -z $fdelate ]];
+                                then
+                                        echo -e "${red} file name cannot be empty...${end}"
+                                
+				elif [[ -f $fdelate ]];
 				then
 					echo -e "$red"
-					rm -i "$fdelate"
+					read -p "Are you sure you want to delete '$fdelate'? (y/n): " confirm
 					echo -e "$end"
-					echo -e "${green_a}Delated $fdelate File Successfully.........................${end}"
+
+					if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
+
+						rm "$fdelate"
+						echo -e "${green_a}Deleted $fdelate File Successfully........${end}"
+				    	else
+						echo -e "${red}File not deleted.${end}"
+				    	fi
+
 				else
 					echo -e "${red}Can not Found $fdelate File${end}"
 				fi
@@ -64,12 +86,25 @@ file_dir() {
 				echo -e "$green_b"
 				read -p "Enter Directory Name To Delate :" ddelate
 				echo -e "$end"
-				if [[ -d $ddelate ]];
+				if [[ -z $ddelate ]];
+                                then
+                                        echo -e "${red} Directory name cannot be empty...${end}"
+
+				elif [[ -d $ddelate ]];
 				then
 					echo -e "$red"
-					rm -ri "$ddelate"
+					read -p "Are you sure you want to delete '$ddelate'? (y/n): " confirm
 					echo -e "$end"
-					echo -e "${green_a}Delated $ddelate Directory Successfully.....................${end}"
+
+					if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
+
+						rm -r "$ddelate"
+						echo -e "${green_a}Deleted $ddelate Directory Successfully........${end}"
+				    	else
+						echo -e "${red}Directory not deleted.${end}"
+				    	fi
+
+
 				else
 					echo -e "${red}Can not Found $ddelate directory${end}"
 				fi
